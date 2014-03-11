@@ -1,0 +1,16 @@
+
+public class Expecting {
+	private boolean expecting = false;
+	
+	public void set(){
+		expecting = true;
+	}
+	
+	public void unset(){
+		expecting = false;
+	}
+	
+	public boolean get(){
+		return expecting;
+	}
+}

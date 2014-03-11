@@ -1,0 +1,11 @@
+import edu.stanford.nlp.tagger.maxent.MaxentTagger;
+
+
+public class demo {
+
+	public static void main(String[] args) {
+		MaxentTagger tagger = new MaxentTagger("taggers/english-left3words-distsim.tagger");
+		
+	}
+
+}
