@@ -2,7 +2,7 @@ BatterBot
 ====================================
 Purpose:
 
-The purpose of this code is to provide a basic chatter bot engine, and an example BatterBot.
+The purpose of this code is to provide a basic chatter bot engine.
 --------------------------------
 Using the code:
 
