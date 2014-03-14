@@ -354,7 +354,7 @@ public class BatterBotDriver
 				ResponseTemplate response44 = new ResponseTemplate(sentence44, bucket44, keys44);
 				
 				String[] sentence45 = {"I don't know a"};
-				String[][] bucket45 = {{"#_VB"}};
+				String[][] bucket45 = {{"#_NNP"}};
 				String[] keys45 = {"_NNP"};
 				
 				ResponseTemplate response45 = new ResponseTemplate(sentence45, bucket45, keys45);
@@ -386,19 +386,19 @@ public class BatterBotDriver
 				ResponseTemplate response48 = new ResponseTemplate(sentence48, bucket48, keys48){
 					public double scaleRules(){
 							exp.set();
-							return 1;
+							return 1.5;
 					}
 				};
 				
 				String[] sentence49 = {"Just checking...anything else you'd like to know?"};
 				String[][] bucket49 = null;
-				String[] keys49 = {"yes","no"};
+				String[] keys49 = {"yes","no ","not"};
 				
 				ResponseTemplate response49 = new ResponseTemplate(sentence49, bucket49, keys49){
 					public double scaleRules(){
 						if(exp.get()){
 							exp.unset();
-							return 5;
+							return 1;
 						}else
 							return 0;
 					}
@@ -548,7 +548,7 @@ public class BatterBotDriver
 				
 				ResponseTemplate response68 = new ResponseTemplate(sentence68, bucket68, keys68);
 				
-				String[] sentence69 = {"","...never heard of it. Must not be in Gotham."};
+				String[] sentence69 = {"",", I think I own that....I mean Bruce Wayne own that."};
 				String[][] bucket69 = {{"#_org"}};
 				String[] keys69 = {"_org"};
 				

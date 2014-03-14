@@ -40,7 +40,7 @@ public class LanguageProcessor implements LanguageProcessorInterface, SharedData
 		String tag = POSTag(unchanged);
 		if(contains(tag,"_NNP "))
 			memTable.put("_NNP", ProperNoun(tag));
-		if(contains(tag,"_VB "))
+		if(contains(tag,"_VB"))
 			memTable.put("_VB", VerbBase(tag));
 		
 		//add any Locations and Organisations to memory using the NER classifier

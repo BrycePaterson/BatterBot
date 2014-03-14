@@ -29,12 +29,10 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Component;
 import java.awt.Dimension;
-
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.RowSpec;
-
 import javax.swing.ScrollPaneConstants;
 
 
@@ -356,7 +354,7 @@ public class BatmanConvo extends JFrame {
 				ResponseTemplate response44 = new ResponseTemplate(sentence44, bucket44, keys44);
 				
 				String[] sentence45 = {"I don't know a"};
-				String[][] bucket45 = {{"#_NNP"}};
+				String[][] bucket45 = {{"#_VB"}};
 				String[] keys45 = {"_NNP"};
 				
 				ResponseTemplate response45 = new ResponseTemplate(sentence45, bucket45, keys45);
@@ -388,19 +386,19 @@ public class BatmanConvo extends JFrame {
 				ResponseTemplate response48 = new ResponseTemplate(sentence48, bucket48, keys48){
 					public double scaleRules(){
 							exp.set();
-							return 1.5;
+							return 1;
 					}
 				};
 				
 				String[] sentence49 = {"Just checking...anything else you'd like to know?"};
 				String[][] bucket49 = null;
-				String[] keys49 = {"yes","no ","not"};
+				String[] keys49 = {"yes","no"};
 				
 				ResponseTemplate response49 = new ResponseTemplate(sentence49, bucket49, keys49){
 					public double scaleRules(){
 						if(exp.get()){
 							exp.unset();
-							return 1;
+							return 5;
 						}else
 							return 0;
 					}
@@ -550,7 +548,7 @@ public class BatmanConvo extends JFrame {
 				
 				ResponseTemplate response68 = new ResponseTemplate(sentence68, bucket68, keys68);
 				
-				String[] sentence69 = {"",", I think I own that....I mean Bruce Wayne own that."};
+				String[] sentence69 = {"",". I think I own that....I mean Bruce Wayne owns that."};
 				String[][] bucket69 = {{"#_org"}};
 				String[] keys69 = {"_org"};
 				

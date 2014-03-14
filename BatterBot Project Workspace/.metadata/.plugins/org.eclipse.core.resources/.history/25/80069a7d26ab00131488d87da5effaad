@@ -1,76 +1,74 @@
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
 
-import java.awt.Color;
-
-import javax.swing.JScrollBar;
-import javax.swing.JLabel;
-
-import com.jgoodies.forms.factories.DefaultComponentFactory;
-
-import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
-
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
-import java.awt.Component;
-import java.awt.Dimension;
-
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.factories.FormFactory;
-import com.jgoodies.forms.layout.RowSpec;
-
-import javax.swing.ScrollPaneConstants;
-
-
-@SuppressWarnings("serial")
-public class BatmanConvo extends JFrame {
-
-	private JPanel contentPane;
-	private JTextField inputText;
+/**
+ * We use a driver class BatterBotDriver which contains all of the components
+ * needed for the Chatter Bot. This class also stores the main function cycle()
+ * which iterates through the user input and chatter bot response cycle.
+ * Additionally, there is a method setup(), which can be used to load our sample
+ * Batter Bot Response Template files.
+ * 
+ * @author Yasha
+ * 
+ */
+public class BatterBotDriver
+{
+	private IOInterface IO = null;
 	private LanguageProcessorInterface LP = new LanguageProcessor();
 	private ResponseSelectorInterface RS = new ResponseSelector();
 	private ResponseBuilderInterface RB = new ResponseBuilder();
-	private String input;
-	ResponseTemplate template = null;
-	private JScrollPane scrollPane;
-	private JTextArea display;
-
+	
 	/**
-	 * Launch the application.
+	 * Basic constructor which sets up the IO class.
+	 * All other necessary classes should be set to default (needs implementation still).
+	 * 
+	 * @param IO The class that will handle the IO operations
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@SuppressWarnings("static-access")
-			public void run() {
-				try {
-					BatmanConvo frame = new BatmanConvo();
-					frame.setup();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public BatterBotDriver(IOInterface IO)
+	{
+		this.IO = IO;
 	}
-
+	
+	
+	/**
+	 * The main function that can be called to interact with the batterbot. This function
+	 * handles all of the IO operations, message decoding, response building, and will
+	 * terminate naturally when the batterbot decides that conversation is over and sends
+	 * a valediction.
+	 */
+	public void cycle()
+	{
+		String input;
+		ResponseTemplate template = null;
+		
+		while(true)
+		{
+			//This is expected to block waiting for input
+			input = IO.read(); 
+			
+			//Decode the user input into keywords
+			KeyWordList keys = LP.extractKeyWords(input);
+			
+			if(template != null)
+				template.processResponse(input, keys);
+			
+			//Select the next response template
+			template = RS.selectTemplate(keys);
+			
+			//Build the response from template
+			String response = RB.buildResponse(template, keys);
+			
+			//Print the next response
+			IO.print(response);
+			
+			//Checks if the batterbot intends to end the conversation.
+			if(template.isValediction())
+				break;
+		}
+	}
+	
+	
 	@SuppressWarnings("unused")
-	public static void setup()
+	public void setup()
 	{
 		//This is just an example of what a response template definition will look like
 		
@@ -356,7 +354,7 @@ public class BatmanConvo extends JFrame {
 				ResponseTemplate response44 = new ResponseTemplate(sentence44, bucket44, keys44);
 				
 				String[] sentence45 = {"I don't know a"};
-				String[][] bucket45 = {{"#_NNP"}};
+				String[][] bucket45 = {{"#_VB"}};
 				String[] keys45 = {"_NNP"};
 				
 				ResponseTemplate response45 = new ResponseTemplate(sentence45, bucket45, keys45);
@@ -394,7 +392,7 @@ public class BatmanConvo extends JFrame {
 				
 				String[] sentence49 = {"Just checking...anything else you'd like to know?"};
 				String[][] bucket49 = null;
-				String[] keys49 = {"yes","no ","not"};
+				String[] keys49 = {"yes","no","computer"};
 				
 				ResponseTemplate response49 = new ResponseTemplate(sentence49, bucket49, keys49){
 					public double scaleRules(){
@@ -572,76 +570,25 @@ public class BatmanConvo extends JFrame {
 					}
 				};
 	}
-	/**
-	 * Create the frame.
-	 */
-	public BatmanConvo() {
-		setTitle("Batman");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setAutoscrolls(true);
-		contentPane.setPreferredSize(new Dimension(100, 50));
-		contentPane.setBackground(Color.DARK_GRAY);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+	
+	@SuppressWarnings("static-access")
+	public static void main(String[] args)
+	{	
+		BatterBotDriver bat = new BatterBotDriver(new IOconsole());
 		
-		inputText = new JTextField();
-		inputText.setBackground(Color.LIGHT_GRAY);
-		inputText.setColumns(10);
+		bat.setup();
+		try
+		{
+		bat.cycle();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			System.out.println(bat.LP.masterKeys);
+		}
 		
-		JButton send = new JButton("Send");
-		send.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		send.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				input=inputText.getText();
-				display.setText(display.getText()+"YOU: "+input+"\n\n");
-				inputText.setText("");
-				
-				//Decode the user input into keywords
-				KeyWordList keys = LP.extractKeyWords(input);
-				
-				if(template != null)
-					template.processResponse(input, keys);
-				
-				//Select the next response template
-				template = RS.selectTemplate(keys);
-				
-				//Build the response from template
-				String response = RB.buildResponse(template, keys);
-				
-				display.setText(display.getText()+"Batman: "+response+"\n\n");
-
-				
-			}
-		});
-		send.setBackground(Color.YELLOW);
+		System.out.println(bat.LP.memTable.get("type"));
 		
-		scrollPane = new JScrollPane();
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setPreferredSize(new Dimension(10, 2));
-		scrollPane.setBorder(null);
-		scrollPane.setAutoscrolls(true);
-		contentPane.getRootPane().setDefaultButton(send);
-		contentPane.setLayout(new FormLayout(new ColumnSpec[] {
-				FormFactory.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("312px"),
-				FormFactory.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("82px"),},
-			new RowSpec[] {
-				FormFactory.PARAGRAPH_GAP_ROWSPEC,
-				RowSpec.decode("205px"),
-				FormFactory.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("25px"),}));
-		
-		display = new JTextArea();
-		display.setWrapStyleWord(true);
-		display.setLineWrap(true);
-		display.setBackground(Color.DARK_GRAY);
-		display.setForeground(Color.YELLOW);
-		scrollPane.setViewportView(display);
-		contentPane.add(scrollPane, "2, 2, 3, 1, fill, fill");
-		contentPane.add(inputText, "2, 4, fill, bottom");
-		contentPane.add(send, "4, 4, fill, top");
 	}
+	
 }
