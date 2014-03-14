@@ -543,7 +543,7 @@ public class BatterBotDriver
 				ResponseTemplate response67 = new ResponseTemplate(sentence67, bucket67, keys67);
 				
 				String[] sentence68 = {"I've never been to",". I only care about defending Gotham from my enemies."};
-				String[][] bucket68 = {{"#loc"}};
+				String[][] bucket68 = {{"#_loc"}};
 				String[] keys68 = {"_loc"};
 				
 				ResponseTemplate response68 = new ResponseTemplate(sentence68, bucket68, keys68);
