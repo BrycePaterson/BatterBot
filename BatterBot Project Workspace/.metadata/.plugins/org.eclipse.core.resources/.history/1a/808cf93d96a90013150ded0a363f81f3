@@ -1,0 +1,28 @@
+import edu.stanford.nlp.ie.crf.*;
+import edu.stanford.nlp.ie.AbstractSequenceClassifier;
+import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.ling.CoreAnnotations.AnswerAnnotation;
+import edu.stanford.nlp.util.StringUtils;
+
+import java.util.List;
+import java.io.IOException;
+
+public class nerDemo {
+
+    public static void main(String[] args) throws IOException {
+
+        String serializedClassifier = "ner/english.all.3class.distsim.crf.ser";
+
+        if (args.length > 0) {
+          serializedClassifier = args[0];
+        }
+
+        AbstractSequenceClassifier classifier = CRFClassifier.getClassifierNoExceptions(serializedClassifier);
+        
+        String s1 = "Good afternoon Rajat Raina, how are you today? It is 11 o'clock";
+        String s2 = "I go to school at Stanford University, which is located in California.";
+        System.out.println(classifier.classifyToString(s1));
+        //System.out.println(classifier.classifyWithInlineXML(s2));
+        //System.out.println(classifier.classifyToString(s2, "xml", true));
+    }
+}

@@ -41,7 +41,7 @@ public class ResponseBuilder implements ResponseBuilderInterface
 						//if one of the wordbucket words is '#memlocation'
 						String mem = template.wordBuckets[i][select].substring(1);
 						response+=memTable.get(mem);
-					
+						memTable.remove(mem);
 					}
 					else
 					{

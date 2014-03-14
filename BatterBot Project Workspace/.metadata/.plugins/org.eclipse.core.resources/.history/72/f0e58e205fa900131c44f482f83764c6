@@ -1,0 +1,71 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import java.awt.Color;
+import javax.swing.JScrollBar;
+import javax.swing.JLabel;
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
+
+
+public class BatmanConvo extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField txtEnterYouResponse;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					BatmanConvo frame = new BatmanConvo();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public BatmanConvo() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.DARK_GRAY);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		txtEnterYouResponse = new JTextField();
+		txtEnterYouResponse.addInputMethodListener(new InputMethodListener() {
+			public void caretPositionChanged(InputMethodEvent event) {
+			}
+			public void inputMethodTextChanged(InputMethodEvent event) {
+			}
+		});
+		txtEnterYouResponse.setForeground(Color.BLACK);
+		txtEnterYouResponse.setBackground(Color.LIGHT_GRAY);
+		txtEnterYouResponse.setToolTipText("Response");
+		contentPane.add(txtEnterYouResponse, BorderLayout.SOUTH);
+		txtEnterYouResponse.setColumns(10);
+		
+		JTextArea txtrKjkjkl = new JTextArea();
+		txtrKjkjkl.setWrapStyleWord(true);
+		txtrKjkjkl.setForeground(Color.YELLOW);
+		txtrKjkjkl.setBackground(Color.DARK_GRAY);
+		contentPane.add(txtrKjkjkl, BorderLayout.NORTH);
+	}
+
+}

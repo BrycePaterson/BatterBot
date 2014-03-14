@@ -45,10 +45,6 @@ public class ResponseTemplate implements ResponseTemplateInterface, SharedData
 	 */
 	private static int questionsAsked = 0;
 	
-	/**
-	 * Provides access to contains().
-	 */
-	public static LanguageProcessor LP = new LanguageProcessor();
 	
 	/**
 	 * Simple flag for determining whether or not this

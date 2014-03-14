@@ -28,7 +28,7 @@ public class ResponseSelector implements ResponseSelectorInterface, SharedData
 				
 		int rank = Integer.MIN_VALUE;
 		ResponseTemplate bestResponse = null;
-
+		
 		for(ResponseTemplate response:list)
 		{
 			int curRank = 0;

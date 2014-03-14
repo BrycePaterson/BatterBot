@@ -1,10 +1,5 @@
-import java.awt.Color;
-import java.awt.Dimension;
 import java.util.Scanner;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
 
 /**
  * Simple IO class designed to interact with the console.
