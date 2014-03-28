@@ -10,4 +10,15 @@
 <fullyQualifiedTypeName name="javax.swing.JTextArea"/>
 <fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
 <fullyQualifiedTypeName name="edu.stanford.nlp.tagger.maxent.MaxentTagger"/>
+<fullyQualifiedTypeName name="twitter4j.Twitter"/>
+<fullyQualifiedTypeName name="twitter4j.User"/>
+<fullyQualifiedTypeName name="twitter4j.TwitterFactory"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="twitter4j.Status"/>
+<fullyQualifiedTypeName name="twitter4j.TwitterException"/>
+<fullyQualifiedTypeName name="twitter4j.auth.RequestToken"/>
+<fullyQualifiedTypeName name="twitter4j.Query"/>
+<fullyQualifiedTypeName name="twitter4j.QueryResult"/>
+<fullyQualifiedTypeName name="twitter4j.ResponseList"/>
+<fullyQualifiedTypeName name="twitter4j.conf.ConfigurationBuilder"/>
 </qualifiedTypeNameHistroy>
