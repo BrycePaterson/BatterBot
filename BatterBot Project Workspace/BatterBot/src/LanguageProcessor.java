@@ -15,13 +15,17 @@ import edu.stanford.nlp.ie.AbstractSequenceClassifier;
 public class LanguageProcessor implements LanguageProcessorInterface, SharedData
 {
 
-	MaxentTagger tagger = new MaxentTagger("taggers/english-left3words-distsim.tagger");
-	String serializedClassifier = "taggers/english.all.3class.distsim.crf.ser";
+	private MaxentTagger tagger = new MaxentTagger("taggers/english-left3words-distsim.tagger");
+	private String serializedClassifier = "taggers/english.all.3class.distsim.crf.ser";
 	@SuppressWarnings("rawtypes")
-	AbstractSequenceClassifier classifier = CRFClassifier.getClassifierNoExceptions(serializedClassifier);
+	private AbstractSequenceClassifier classifier = CRFClassifier.getClassifierNoExceptions(serializedClassifier);
+	private Translation translator = new Translation();
+	private boolean french = false;
 	
 	public KeyWordList extractKeyWords(String input) 
 	{
+		if(french)
+			input = translator.frenchToEnglish(input);
 		String unchanged = input;
 		input = input.toLowerCase();
 		
@@ -127,4 +131,12 @@ public class LanguageProcessor implements LanguageProcessorInterface, SharedData
 		}
 		return org;
 	}//return the organisation from the NER tagged string
+	
+	public void toggleFrench(){
+		if(french)
+			french = false;
+		else
+			french = true;
+	}
+
 }

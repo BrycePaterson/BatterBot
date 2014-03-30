@@ -7,24 +7,31 @@ import twitter4j.conf.ConfigurationBuilder;
 
 
 class tweet{
-	public static void main(String[] args){
-		ConfigurationBuilder cb = new ConfigurationBuilder();
+	private ConfigurationBuilder cb;
+	private TwitterFactory tf;
+	Twitter twitter;
+	public tweet(){
+		cb = new ConfigurationBuilder();
 		cb.setDebugEnabled(true)
 		  .setOAuthConsumerKey("n3XavRH3oklzkew1WRGBA")
 		  .setOAuthConsumerSecret("4k9G5yADbd6XpbBGSbvwPLiXHF0WSUCJuS1JAdhT73Y")
 		  .setOAuthAccessToken("476590575-m7DC9YMPpWZIt5JLcHmt5D1JzOopDxp8jHmNxUkA")
 		  .setOAuthAccessTokenSecret("suljM1UP8NPUlbUNyGIOAivd6baTNzapuJDDqYzOfYRLf");
-		TwitterFactory tf = new TwitterFactory(cb.build());
-		Twitter twitter = tf.getInstance();
+		tf = new TwitterFactory(cb.build());
+		twitter = tf.getInstance();
+	}
+	
+	public String getTweets(String handle){
+		String tweets = "";
 	    try {
-			ResponseList<Status> list = twitter.getUserTimeline("TheBatman");
+			ResponseList<Status> list = twitter.getUserTimeline(handle);
 			for (Status status : list) {
-		        System.out.println(status.getUser().getName() + ":" +
-		                           status.getText());
+				tweets += "@"+status.getUser().getName() + ": " + status.getText() + "\n\n";
 		    }
+			return tweets;
 		} catch (TwitterException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
 	}
 }

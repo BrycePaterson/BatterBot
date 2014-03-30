@@ -13,9 +13,9 @@ import javax.swing.JFrame;
 public class BatterBotDriver
 {
 	private IOInterface IO = null;
-	private LanguageProcessorInterface LP = new LanguageProcessor();
-	private ResponseSelectorInterface RS = new ResponseSelector();
-	private ResponseBuilderInterface RB = new ResponseBuilder();
+	private LanguageProcessor LP = new LanguageProcessor();
+	private ResponseSelector RS = new ResponseSelector();
+	private ResponseBuilder RB = new ResponseBuilder();
 	
 	/**
 	 * Basic constructor which sets up the IO class.
@@ -39,6 +39,8 @@ public class BatterBotDriver
 	{
 		String input;
 		ResponseTemplate template = null;
+		LP.toggleFrench();
+		RB.toggleFrench();
 		
 		while(true)
 		{
@@ -131,7 +133,7 @@ public class BatterBotDriver
 				
 				ResponseTemplate response8 = new ResponseTemplate(sentence8, bucket8, keys8);
 				
-				String[] sentence9 = {"Yes...her and I have always had a 'thing'.  We're both in the Justice League."};
+				String[] sentence9 = {"Yes...her and I have always had a 'thing' and We're both in the Justice League."};
 				String[][] bucket9 = null;
 				String[] keys9 = {"know wonderwoman","know wonder woman","like wonder woman","like wonderwoman","think about wonderwoman","think about wonder woman"};
 				

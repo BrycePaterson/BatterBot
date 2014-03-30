@@ -21,4 +21,9 @@
 <fullyQualifiedTypeName name="twitter4j.QueryResult"/>
 <fullyQualifiedTypeName name="twitter4j.ResponseList"/>
 <fullyQualifiedTypeName name="twitter4j.conf.ConfigurationBuilder"/>
+<fullyQualifiedTypeName name="com.google.api.GoogleAPI"/>
+<fullyQualifiedTypeName name="com.google.api.translate.Language"/>
+<fullyQualifiedTypeName name="com.google.api.translate.Translate"/>
+<fullyQualifiedTypeName name="com.gtranslate.Translator"/>
+<fullyQualifiedTypeName name="com.gtranslate.Language"/>
 </qualifiedTypeNameHistroy>

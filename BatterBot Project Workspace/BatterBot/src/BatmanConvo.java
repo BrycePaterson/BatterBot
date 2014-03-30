@@ -36,6 +36,9 @@ import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.RowSpec;
 
 import javax.swing.ScrollPaneConstants;
+import javax.swing.JRadioButton;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 
 @SuppressWarnings("serial")
@@ -43,13 +46,17 @@ public class BatmanConvo extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField inputText;
-	private LanguageProcessorInterface LP = new LanguageProcessor();
-	private ResponseSelectorInterface RS = new ResponseSelector();
-	private ResponseBuilderInterface RB = new ResponseBuilder();
+	private LanguageProcessor LP = new LanguageProcessor();
+	private ResponseSelector RS = new ResponseSelector();
+	private ResponseBuilder RB = new ResponseBuilder();
+	private tweet tweets = new tweet();
 	private String input;
 	ResponseTemplate template = null;
 	private JScrollPane scrollPane;
 	private JTextArea display;
+	private JRadioButton rdbtnFrench;
+	private JScrollPane scrollPane_1;
+	private JTextArea twitter;
 
 	/**
 	 * Launch the application.
@@ -587,10 +594,12 @@ public class BatmanConvo extends JFrame {
 		setContentPane(contentPane);
 		
 		inputText = new JTextField();
+		inputText.setBounds(10, 240, 318, 20);
 		inputText.setBackground(Color.LIGHT_GRAY);
 		inputText.setColumns(10);
 		
 		JButton send = new JButton("Send");
+		send.setBounds(339, 235, 82, 25);
 		send.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		send.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -618,21 +627,13 @@ public class BatmanConvo extends JFrame {
 		send.setBackground(Color.YELLOW);
 		
 		scrollPane = new JScrollPane();
+		scrollPane.setBounds(154, 7, 267, 217);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setPreferredSize(new Dimension(10, 2));
 		scrollPane.setBorder(null);
 		scrollPane.setAutoscrolls(true);
 		contentPane.getRootPane().setDefaultButton(send);
-		contentPane.setLayout(new FormLayout(new ColumnSpec[] {
-				FormFactory.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("312px"),
-				FormFactory.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("82px"),},
-			new RowSpec[] {
-				FormFactory.PARAGRAPH_GAP_ROWSPEC,
-				RowSpec.decode("205px"),
-				FormFactory.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("25px"),}));
+		contentPane.setLayout(null);
 		
 		display = new JTextArea();
 		display.setWrapStyleWord(true);
@@ -640,8 +641,38 @@ public class BatmanConvo extends JFrame {
 		display.setBackground(Color.DARK_GRAY);
 		display.setForeground(Color.YELLOW);
 		scrollPane.setViewportView(display);
-		contentPane.add(scrollPane, "2, 2, 3, 1, fill, fill");
-		contentPane.add(inputText, "2, 4, fill, bottom");
-		contentPane.add(send, "4, 4, fill, top");
+		contentPane.add(scrollPane);
+		contentPane.add(inputText);
+		contentPane.add(send);
+		
+		rdbtnFrench = new JRadioButton("French");
+		rdbtnFrench.setBounds(16, 7, 109, 23);
+		rdbtnFrench.setForeground(Color.YELLOW);
+		rdbtnFrench.setBackground(Color.DARK_GRAY);
+		rdbtnFrench.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				LP.toggleFrench();
+				RB.toggleFrench();
+			}
+		});
+		contentPane.add(rdbtnFrench);
+		
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setViewportBorder(null);
+		scrollPane_1.setAutoscrolls(true);
+		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane_1.setFont(new Font("Tahoma", Font.PLAIN, 8));
+		scrollPane_1.setBounds(9, 37, 135, 187);
+		contentPane.add(scrollPane_1);
+		
+		twitter = new JTextArea();
+		twitter.setAutoscrolls(false);
+		twitter.setLineWrap(true);
+		twitter.setWrapStyleWord(true);
+		twitter.setFont(new Font("Miriam Fixed", Font.PLAIN, 12));
+		twitter.setForeground(Color.ORANGE);
+		twitter.setBackground(Color.GRAY);
+		twitter.setText(tweets.getTweets("TheBatman"));
+		scrollPane_1.setViewportView(twitter);
 	}
 }

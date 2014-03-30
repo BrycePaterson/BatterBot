@@ -1,0 +1,17 @@
+import com.gtranslate.Language;
+import com.gtranslate.Translator;
+
+
+
+public class Translation {
+
+	public static void main(String[] args) {
+		
+
+	    String translatedText;
+	    Translator translate = Translator.getInstance();
+	    String text = translate.translate("Hello!", Language.FRENCH, Language.ENGLISH);
+	    System.out.println(text);
+	}
+
+}

@@ -1,0 +1,19 @@
+import com.gtranslate.Language;
+import com.gtranslate.Translator;
+
+
+
+public class Translation {
+
+	private String translatedText;
+	private Translator translate = Translator.getInstance();	
+	
+	public String frenchToEnglish(String french){   
+	    return translate.translate(french, Language.FRENCH, Language.ENGLISH);	    
+	}
+	
+	public String englishToFrench(String english){
+		return translate.translate(english, Language.ENGLISH, Language.FRENCH);
+	}
+
+}

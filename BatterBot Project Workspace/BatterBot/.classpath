@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="C:/Users/Bryce/Documents/GitHub/BatterBot/BatterBot Project Workspace/stanford-ner-2014-01-04/stanford-ner.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Bryce/Documents/GitHub/BatterBot/BatterBot Project Workspace/stanford-postagger-2014-01-04/stanford-postagger.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Bryce/Documents/GitHub/BatterBot/BatterBot Project Workspace/Twitter/lib/twitter4j-core-4.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Bryce/Documents/GitHub/BatterBot/BatterBot Project Workspace/Google Translate/gtranslateapi-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

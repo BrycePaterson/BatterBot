@@ -1,5 +1,5 @@
 
-public class Twitter {
+public class Translate {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

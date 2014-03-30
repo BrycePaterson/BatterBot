@@ -12,6 +12,8 @@ import java.util.Random;
  */
 public class ResponseBuilder implements ResponseBuilderInterface 
 {
+	private boolean french = false;
+	private Translation translator = new Translation();
 	/**
 	 * Method that takes a given Response Template, and user inputed Keywords
 	 *  and builds a Response to print
@@ -55,6 +57,8 @@ public class ResponseBuilder implements ResponseBuilderInterface
 			response = response+"...As I've already told you. My time is precious.";
 		}
 		template.setAsked();
+		if(french)
+			response = translator.englishToFrench(response);
 		return response;
 	}
 
@@ -70,5 +74,12 @@ public class ResponseBuilder implements ResponseBuilderInterface
 			return true;
 		}
 		return false;
+	}
+	
+	public void toggleFrench(){
+		if(french)
+			french = false;
+		else
+			french = true;
 	}
 }
