@@ -588,7 +588,7 @@ public class BatmanConvo extends JFrame {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setAutoscrolls(true);
-		contentPane.setPreferredSize(new Dimension(100, 50));
+		contentPane.setPreferredSize(new Dimension(200, 100));
 		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -627,7 +627,7 @@ public class BatmanConvo extends JFrame {
 		send.setBackground(Color.YELLOW);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(154, 7, 267, 217);
+		scrollPane.setBounds(10, 130, 414, 99);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setPreferredSize(new Dimension(10, 2));
 		scrollPane.setBorder(null);
@@ -636,6 +636,7 @@ public class BatmanConvo extends JFrame {
 		contentPane.setLayout(null);
 		
 		display = new JTextArea();
+		display.setEditable(false);
 		display.setWrapStyleWord(true);
 		display.setLineWrap(true);
 		display.setBackground(Color.DARK_GRAY);
@@ -662,14 +663,15 @@ public class BatmanConvo extends JFrame {
 		scrollPane_1.setAutoscrolls(true);
 		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane_1.setFont(new Font("Tahoma", Font.PLAIN, 8));
-		scrollPane_1.setBounds(9, 37, 135, 187);
+		scrollPane_1.setBounds(10, 37, 414, 94);
 		contentPane.add(scrollPane_1);
 		
 		twitter = new JTextArea();
+		twitter.setEditable(false);
 		twitter.setAutoscrolls(false);
 		twitter.setLineWrap(true);
 		twitter.setWrapStyleWord(true);
-		twitter.setFont(new Font("Miriam Fixed", Font.PLAIN, 12));
+		twitter.setFont(new Font("Miriam Fixed", Font.PLAIN, 14));
 		twitter.setForeground(Color.ORANGE);
 		twitter.setBackground(Color.GRAY);
 		twitter.setText(tweets.getTweets("TheBatman"));

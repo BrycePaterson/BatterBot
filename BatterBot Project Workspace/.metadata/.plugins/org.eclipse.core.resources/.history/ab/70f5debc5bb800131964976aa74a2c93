@@ -1,0 +1,60 @@
+import com.wolfram.alpha.WAEngine;
+import com.wolfram.alpha.WAException;
+import com.wolfram.alpha.WAPlainText;
+import com.wolfram.alpha.WAPod;
+import com.wolfram.alpha.WAQuery;
+import com.wolfram.alpha.WAQueryResult;
+import com.wolfram.alpha.WASubpod;
+
+
+public class Wolfram {
+
+	public static void main(String[] args) {
+		WAEngine engine = new WAEngine();
+        
+        // These properties will be set in all the WAQuery objects created from this WAEngine.
+        engine.setAppID("256R69-2WE2YEV89V");
+        engine.addFormat("plaintext");
+
+        WAQuery query = engine.createQuery();
+        
+        query.setInput("synonyms honest");
+        
+        try {
+			WAQueryResult queryResult = engine.performQuery(query);
+			queryResult.getPods();
+			for (WAPod pod : queryResult.getPods()) {
+                if (!pod.isError()) {
+                	if(pod.getTitle().equals("Result")){
+                		for (WASubpod subpod : pod.getSubpods()) {
+                			for (Object element : subpod.getContents()) {
+                				if (element instanceof WAPlainText) {
+                					String[] synonyms = getWords(((WAPlainText) element).getText(),6);
+                					for(int i=0; i<6;i++)
+                						System.out.println(synonyms.toString());
+                				}
+                			}
+                		}
+                		System.out.println("");
+                	}
+                }
+            }
+		} catch (WAException e) {
+			e.printStackTrace();
+		}
+        
+	}
+	
+	public static String[] getWords(String text, int n){
+		String[] words = new String[n];
+		for(int i=0;i<4;i++){
+			if(text.contains(" "))
+				words[i] = text.substring(0, text.indexOf(' '));
+			else
+				words[i] = text;
+			text = text.substring(text.indexOf(' ')+1);
+		}
+		return words;
+	}
+
+}

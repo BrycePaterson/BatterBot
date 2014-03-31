@@ -26,4 +26,10 @@
 <fullyQualifiedTypeName name="com.google.api.translate.Translate"/>
 <fullyQualifiedTypeName name="com.gtranslate.Translator"/>
 <fullyQualifiedTypeName name="com.gtranslate.Language"/>
+<fullyQualifiedTypeName name="com.wolfram.alpha.WAEngine"/>
+<fullyQualifiedTypeName name="com.wolfram.alpha.WAQuery"/>
+<fullyQualifiedTypeName name="com.wolfram.alpha.WAQueryResult"/>
+<fullyQualifiedTypeName name="com.wolfram.alpha.WAPod"/>
+<fullyQualifiedTypeName name="com.wolfram.alpha.WASubpod"/>
+<fullyQualifiedTypeName name="com.wolfram.alpha.WAPlainText"/>
 </qualifiedTypeNameHistroy>

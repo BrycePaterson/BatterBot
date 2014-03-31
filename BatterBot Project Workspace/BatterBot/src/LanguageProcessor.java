@@ -20,6 +20,7 @@ public class LanguageProcessor implements LanguageProcessorInterface, SharedData
 	@SuppressWarnings("rawtypes")
 	private AbstractSequenceClassifier classifier = CRFClassifier.getClassifierNoExceptions(serializedClassifier);
 	private Translation translator = new Translation();
+	private Wolfram wolf= new Wolfram();
 	private boolean french = false;
 	
 	public KeyWordList extractKeyWords(String input) 
@@ -58,6 +59,7 @@ public class LanguageProcessor implements LanguageProcessorInterface, SharedData
 			kwl.addKey("_org");
 		}
 		
+		
 		if(kwl.size() == 0){
 			//Add any Proper Nouns of Verb Bases to the keyword list
 			if(memTable.containsKey("_NNP")){
@@ -65,6 +67,44 @@ public class LanguageProcessor implements LanguageProcessorInterface, SharedData
 			}else if(memTable.containsKey("_VB")){
 				kwl.addKey("_VB");
 			}else kwl.addKey("null");
+		}
+		
+		String[][] synonyms = new String[10][10];
+		//check for any synonyms
+		if(kwl.size() == 0){
+			int i = 0;
+			String temp = tag;
+			
+			//add noun synoynyms
+			while(contains(temp,"_NN") && i<10){
+				synonyms[i] = wolf.getSynonyms(Noun(temp));
+				temp = temp.substring(temp.indexOf("_NN")+1);
+				i++;
+			}
+			
+			temp = tag;
+			//add verb synonyms
+			while(contains(temp,"_VB") && i<10){
+				synonyms[i] = wolf.getSynonyms(Verb(temp));
+				temp = temp.substring(temp.indexOf("_VB")+1);
+				i++;
+			}
+			
+			for(i=0;i<10;i++){
+				if(synonyms[i]!=null){
+					for(int j=0;j<10;j++){
+						if(synonyms[i][j] != null){
+							for(int k=0; k<masterkeys.length; k++)
+							{
+								if(synonyms[i][j].contentEquals(masterkeys[k]))
+								{
+									kwl.addKey(masterkeys[k]);
+								}
+							} //Add synonym in input to KeyWordList if it is in masterKeys
+						}
+					}
+				}
+			}
 		}
 		return kwl;
 	}
@@ -105,6 +145,28 @@ public class LanguageProcessor implements LanguageProcessorInterface, SharedData
 			verb = " "+verb;
 		}
 		verb = verb +"ing";
+		return verb;
+	}//return the verb base from the POS tagged string
+	
+	public String Noun(String input){
+		String Noun; 
+		input = input.substring(0, input.indexOf("_NN"));
+		if(contains(input," "))
+			Noun = input.substring(input.lastIndexOf(" "), input.length());
+		else{
+			Noun = input.substring(0, input.length());
+		}
+		return Noun;
+	}//return the properNoun from the POS tagged string
+	
+	public String Verb(String input){
+		String verb; 
+		input = input.substring(0, input.indexOf("_VB"));
+		if(contains(input," "))
+			verb = input.substring(input.lastIndexOf(" "), input.length());
+		else{
+			verb = input.substring(0, input.length());
+		}
 		return verb;
 	}//return the verb base from the POS tagged string
 	

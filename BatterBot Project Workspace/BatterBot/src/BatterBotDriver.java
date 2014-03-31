@@ -39,8 +39,8 @@ public class BatterBotDriver
 	{
 		String input;
 		ResponseTemplate template = null;
-		LP.toggleFrench();
-		RB.toggleFrench();
+		//LP.toggleFrench();
+		//RB.toggleFrench();
 		
 		while(true)
 		{
