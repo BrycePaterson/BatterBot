@@ -578,6 +578,18 @@ public class BatmanConvo extends JFrame {
 						return 0.8;
 					}
 				};
+				
+				String[] sentence72 = {"Yeah, I fight sharks from time to time..."};
+				String[][] bucket72 = null;
+				String[] keys72 = {"shark"};
+				
+				ResponseTemplate response72 = new ResponseTemplate(sentence72, bucket72, keys72);
+				
+				String[] sentence73 = {"I can jump pretty damn high"};
+				String[][] bucket73 = null;
+				String[] keys73 = {"jump"};
+				
+				ResponseTemplate response73 = new ResponseTemplate(sentence73, bucket73, keys73);
 	}
 	/**
 	 * Create the frame.

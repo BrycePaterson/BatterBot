@@ -60,15 +60,6 @@ public class LanguageProcessor implements LanguageProcessorInterface, SharedData
 		}
 		
 		
-		if(kwl.size() == 0){
-			//Add any Proper Nouns of Verb Bases to the keyword list
-			if(memTable.containsKey("_NNP")){
-				kwl.addKey("_NNP");
-			}else if(memTable.containsKey("_VB")){
-				kwl.addKey("_VB");
-			}else kwl.addKey("null");
-		}
-		
 		String[][] synonyms = new String[10][10];
 		//check for any synonyms
 		if(kwl.size() == 0){
@@ -106,6 +97,16 @@ public class LanguageProcessor implements LanguageProcessorInterface, SharedData
 				}
 			}
 		}
+		
+		if(kwl.size() == 0){
+			//Add any Proper Nouns of Verb Bases to the keyword list
+			if(memTable.containsKey("_NNP")){
+				kwl.addKey("_NNP");
+			}else if(memTable.containsKey("_VB")){
+				kwl.addKey("_VB");
+			}else kwl.addKey("null");
+		}
+		
 		return kwl;
 	}
 	

@@ -68,24 +68,36 @@ We have created our own class, the KeyWordList, which is used to store a list of
 Batman Convo:
 
 This is the GUI class. Running this class results in the GUI version of the program.  The GUI was constructed using the Eclipse plugin Window Builder.  The theme of the GUI is the traditional Batman colours: black, grey, and yellow.
+-------------------------------------------------------
+Translation
+
+This is a class that implements the Google Translate API.  This class includes a constructor as well as a method to translate the input from french to english, and from english to french.  This class is used by the language processor and response builder to allow the conversation to be in French.
+-------------------------------------------------------
+Tweet:
+
+This is a class that implements the twitter API.  This class allows you to search the 20 most recent tweets from an given twitter handle, of the form @example.  Tweet class contains a method for getting tweets given a string of the twitter handle so @example would be passed as "example"
+--------------------------------------------------------
+Wolfram:
+
+This is a class that implements the Wolfram-Alpha API.  This class allows you to search for synonyms of a given word using Wolfram, it also parses the return data and puts any synonyms in a String array.
 ===========================================================
 ADDED FEATURES:
-1. GUI: A GUI was built using Eclipse Window Builder.
+1. Google Translate API:  Use of this API in the Translation.java class allows the conversation to take place in French.  It could also easily be expanded to include other languages.  The overall system looks for a french flag, when this flag is raised the language processor translates the input from french to english before processing it, and the response builder translates the response back from english to french immediately before returning it.  Which all to say that the processing of the conversation is still done in english.
+	EX:  YOU: qui est votre pere
 
-2. Extra Topic: The original was Batman's Crime fighting career, and was more of an interview. Using the new features, the topic of general conversation was added. Responses and questions asked about the user and personal conversation pieces added.
-	Ex:	You: hi
-		BatterBot: Hi, this is Batman. What is your name?
-		You: my name is Bryce
-		BatterBot: Nice to meet you, Bryce. What would you like to know?
-
-3. 5 answers for outside the topics:  There are two generic answers for a response outside of the topics. Two responses that make use of the POS tagger. In the event that no keywords are in the user input but there is a proper noun, the agent responds to the person that batman doesn't know.  Then if there is no proper noun but there is a verb base, describing an activity batman doesn't know, he responds to the activity. Finally is 2 responses that make use of the NER tagger. So if there are no keywords in the input there is a Location, batman can answer in reference to that location.  Worth noting that a location is also a proper noun but more specific, hence needing the NER.
-	Ex:	You: do you know Charles Xavier?
-		BatterBot: I don't know a Charles
+		Batman: Je ne veux pas parler de mon père . 
 		
-4. POS tagger: The addition of the POS tagging library from the Stanford NLP, allows for more interesting responses to be built.  It allows for Names and actions, or other word types to be taken from the input and responses to be selected according to that.
-	Ex:	You: i like to walk
-		BatterBot: I don't know anything about this ' walking', I only know about crime fighting
+2. Twitter API:  Use of this API in the tweet.java class allows searching of the 20 most recent tweets of a given (public) twitter handle, in this case @TheBatman.  The system uses this API to display the tweets in the GUI and also to allow the user to ask batman about some of those tweets.
+	EX: YOU: You fight sharks?
 
-5. NER classifier: The addition of the NER classifier from the Stanford NLP, allows for more interesting responses to be built.  It allows for the names of Locations and Organizations, or other specific categories of words to be taken from the input and used in selecting and building responses.
-	Ex:	You: I work at Google
-		BatterBot:  Google, I think I own that....I mean Bruce Wayne own that.
+		Batman: Yeah, I fight sharks from time to time...
+
+3. Wolfram-Alpha API:  Use of this API in the Wolfram.java class allows querying Wolfram-Alpha for synonyms of the given word.  The system uses this API to search for synonyms to words in the user input in the case that nothing else generates a response.  These synonyms are then checked against the existing keywords.
+	EX: YOU: jump
+
+		Batman: I can jump pretty damn high
+
+		YOU: bound
+
+		Batman: I can jump pretty damn high...As I've already told you. My time is precious.
+		

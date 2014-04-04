@@ -32,4 +32,5 @@
 <fullyQualifiedTypeName name="com.wolfram.alpha.WAPod"/>
 <fullyQualifiedTypeName name="com.wolfram.alpha.WASubpod"/>
 <fullyQualifiedTypeName name="com.wolfram.alpha.WAPlainText"/>
+<fullyQualifiedTypeName name="jars.ResponseTemplate"/>
 </qualifiedTypeNameHistroy>
